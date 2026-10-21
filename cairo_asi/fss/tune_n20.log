@@ -1,0 +1,49 @@
+[tune n=20 it0] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=20 it0] round 2000/10000 49s  min swap 0.11  trips 0
+[tune n=20 it0] round 4000/10000 97s  min swap 0.05  trips 0
+[tune n=20 it0] round 6000/10000 161s  min swap 0.04  trips 0
+[tune n=20 it0] round 8000/10000 211s  min swap 0.14  trips 0
+  it0 acc: [0.86, 0.84, 0.81, 0.78, 0.74, 0.68, 0.61, 0.26, 0.23, 0.55, 0.62, 0.65, 0.66, 0.67, 0.68, 0.69, 0.69, 0.7, 0.7, 0.71, 0.55, 0.56, 0.56, 0.59, 0.59, 0.6, 0.6, 0.59, 0.6]
+[tune n=20 it1] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=20 it1] round 2000/10000 87s  min swap 0.00  trips 0
+[tune n=20 it1] round 4000/10000 170s  min swap 0.00  trips 0
+[tune n=20 it1] round 6000/10000 257s  min swap 0.00  trips 0
+[tune n=20 it1] round 8000/10000 375s  min swap 0.00  trips 0
+  it1 acc: [0.72, 0.71, 0.72, 0.71, 0.79, 0.74, 0.66, 0.02, 0.63, 0.72, 0.67, 0.64, 0.64, 0.65, 0.64, 0.64, 0.65, 0.65, 0.64, 0.66, 0.59, 0.59, 0.59, 0.6, 0.62, 0.61, 0.6, 0.6, 0.6]
+[tune n=20 it2] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=20 it2] round 2000/10000 147s  min swap 0.05  trips 0
+[tune n=20 it0] round 0/10000 1s  min swap 0.00  trips 0
+[tune n=20 it0] round 2000/10000 108s  min swap 0.11  trips 0
+[tune n=20 it0] round 4000/10000 189s  min swap 0.05  trips 0
+[tune n=20 it0] round 0/10000 1s  min swap 0.00  trips 0
+[tune n=20 it0] round 2000/10000 92s  min swap 0.11  trips 0
+[tune n=20 it0] stopped by signal
+[tune n=20 it0] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=20 it0] round 2000/10000 80s  min swap 0.11  trips 0
+[tune n=20 it0] round 4000/10000 163s  min swap 0.05  trips 0
+[tune n=20 it0] round 6000/10000 268s  min swap 0.04  trips 0
+[tune n=20 it0] round 8000/10000 437s  min swap 0.14  trips 0
+  it0 acc: [0.86, 0.84, 0.81, 0.78, 0.74, 0.68, 0.61, 0.26, 0.23, 0.55, 0.62, 0.65, 0.66, 0.67, 0.68, 0.69, 0.69, 0.7, 0.7, 0.71, 0.55, 0.56, 0.56, 0.59, 0.59, 0.6, 0.6, 0.59, 0.6]
+[tune n=20 it1] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=20 it1] round 2000/10000 152s  min swap 0.00  trips 0
+[tune n=20 it1] round 4000/10000 307s  min swap 0.00  trips 0
+[tune n=20 it1] stopped by signal
+[tune n=20 it0] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=20 it0] round 2000/10000 102s  min swap 0.02  trips 0
+[tune n=20 it0] round 4000/10000 218s  min swap 0.12  trips 0
+[tune n=20 it0] round 6000/10000 317s  min swap 0.08  trips 0
+[tune n=20 it0] round 8000/10000 412s  min swap 0.06  trips 0
+  it0 acc: [0.85, 0.82, 0.8, 0.78, 0.71, 0.65, 0.57, 0.05, 0.46, 0.59, 0.62, 0.64, 0.63, 0.66, 0.66, 0.68, 0.68, 0.69, 0.7, 0.66, 0.68, 0.67, 0.68]
+[tune n=20 it1] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=20 it1] round 2000/10000 87s  min swap 0.00  trips 0
+[tune n=20 it1] round 4000/10000 173s  min swap 0.00  trips 0
+[tune n=20 it1] round 6000/10000 260s  min swap 0.00  trips 0
+[tune n=20 it1] round 8000/10000 350s  min swap 0.15  trips 1
+  it1 acc: [0.7, 0.71, 0.7, 0.7, 0.76, 0.74, 0.69, 0.24, 0.41, 0.76, 0.67, 0.67, 0.65, 0.64, 0.63, 0.62, 0.64, 0.63, 0.64, 0.6, 0.63, 0.62, 0.64]
+[tune n=20 it2] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=20 it2] round 2000/10000 107s  min swap 0.01  trips 0
+[tune n=20 it2] round 4000/10000 183s  min swap 0.01  trips 0
+[tune n=20 it2] round 6000/10000 261s  min swap 0.03  trips 0
+[tune n=20 it2] round 8000/10000 340s  min swap 0.06  trips 0
+  it2 acc: [0.67, 0.65, 0.67, 0.66, 0.69, 0.78, 0.73, 0.46, 0.2, 0.79, 0.66, 0.65, 0.61, 0.61, 0.64, 0.63, 0.63, 0.63, 0.64, 0.62, 0.63, 0.63, 0.63]
+ladder -> fss/ladder_d0.1450_n20.json [0.08, 0.0886, 0.0957, 0.1016, 0.1066, 0.1103, 0.1123, 0.1144, 0.1166, 0.1191, 0.1218, 0.1271, 0.1331, 0.14, 0.1475, 0.1552, 0.1637, 0.1729, 0.183, 0.194, 0.206, 0.2196, 0.234, 0.25]

@@ -1,0 +1,1 @@
+SyntaxError: Non-UTF-8 code starting with '\xca' in file /bin/zsh on line 1, but no encoding declared; see https://peps.python.org/pep-0263/ for details

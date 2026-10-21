@@ -1,0 +1,40 @@
+n=8: T*=0.11619 ± 5.5e-05  dF=1.0222 ± 0.0046  latent/N=0.0085792 ± 3.8e-06  Cmax=0.85409 ± 0.0012 at T=0.1160  2/3-Vmin=1.51e-08  A-vs-C max|z|=2.7
+   A-start: rounds 1000000, trips 1397, min swap 0.70, max tau_E 106 (min n/tau 7552); T*=0.11622469149621731, dF=1.0241463410945792, T*_w=0.11620913546171972
+   C-start: rounds 1000000, trips 1453, min swap 0.70, max tau_E 115 (min n/tau 6929); T*=0.11614604448552307, dF=1.020178327532184, T*_w=0.1161330061900153
+   T*_w=0.11617 ± 5.7e-05 dF_w=1.0222 ± 0.0046 dF(ks x2)=None
+   psi at T*, all: weight=1.000, absA=0.735, absC=0.173, rmsA=0.791, rmsC=0.262, fracC=0.060, fracA=0.689
+   psi at T*, lowE_A_branch: weight=0.497, absA=0.982, absC=0.037, rmsA=0.983, rmsC=0.058, fracC=0.000, fracA=1.000
+   psi at T*, highE_branch: weight=0.503, absA=0.491, absC=0.307, rmsA=0.539, rmsC=0.364, fracC=0.120, fracA=0.381
+   psi at T*, highE_peak: weight=0.430, absA=0.461, absC=0.319, rmsA=0.503, rmsC=0.372, fracC=0.124, fracA=0.330
+n=12: T*=0.11543 ± 7.8e-05  dF=1.9327 ± 0.046  latent/N=0.0085966 ± 6e-06  Cmax=1.7407 ± 0.0075 at T=0.1155  2/3-Vmin=1.35e-08  A-vs-C max|z|=3.0
+   A-start: rounds 600000, trips 193, min swap 0.57, max tau_E 613 (min n/tau 783); T*=0.11544768108508661, dF=1.87480130171961, T*_w=0.11562266825229436
+   C-start: rounds 600000, trips 169, min swap 0.56, max tau_E 635 (min n/tau 756); T*=0.11540417000234976, dF=1.9942493342195124, T*_w=0.11556439187262894
+   T*_w=0.11559 ± 8.6e-05 dF_w=1.9221 ± 0.045 dF(ks x2)=1.2785 ± 0.026
+   psi at T*, all: weight=1.000, absA=0.735, absC=0.131, rmsA=0.789, rmsC=0.203, fracC=0.028, fracA=0.721
+   psi at T*, lowE_A_branch: weight=0.536, absA=0.970, absC=0.034, rmsA=0.971, rmsC=0.049, fracC=0.000, fracA=1.000
+   psi at T*, highE_branch: weight=0.464, absA=0.464, absC=0.242, rmsA=0.502, rmsC=0.292, fracC=0.060, fracA=0.400
+   psi at T*, highE_peak: weight=0.415, absA=0.435, absC=0.254, rmsA=0.469, rmsC=0.302, fracC=0.064, fracA=0.343
+n=16: T*=0.11504 ± 8.9e-05  dF=2.3107 ± 0.065  latent/N=0.008516 ± 6.3e-06  Cmax=2.9448 ± 0.026 at T=0.1150  2/3-Vmin=1.28e-08  A-vs-C max|z|=2.6
+   A-start: rounds 500000, trips 45, min swap 0.45, max tau_E 3047 (min n/tau 131); T*=0.11503529096778073, dF=2.258684458027161, T*_w=0.11510320414857875
+   C-start: rounds 500000, trips 49, min swap 0.40, max tau_E 1938 (min n/tau 206); T*=0.11503894838717142, dF=2.3685846780858295, T*_w=0.11506845621295282
+   T*_w=0.11508 ± 9.5e-05 dF_w=2.317 ± 0.065 dF(ks x2)=1.9579 ± 0.066
+   psi at T*, all: weight=1.000, absA=0.740, absC=0.103, rmsA=0.790, rmsC=0.164, fracC=0.009, fracA=0.739
+   psi at T*, lowE_A_branch: weight=0.517, absA=0.975, absC=0.025, rmsA=0.975, rmsC=0.035, fracC=0.000, fracA=1.000
+   psi at T*, highE_branch: weight=0.483, absA=0.488, absC=0.186, rmsA=0.523, rmsC=0.233, fracC=0.019, fracA=0.460
+   psi at T*, highE_peak: weight=0.423, absA=0.446, absC=0.201, rmsA=0.475, rmsC=0.245, fracC=0.022, fracA=0.384
+n=20: T*=0.11518 ± 0.00014  dF=2.0336 ± 0.14  latent/N=0.0083847 ± 1.1e-05  Cmax=4.1662 ± 0.11 at T=0.1153  2/3-Vmin=1.16e-08  A-vs-C max|z|=2.5
+   A-start: rounds 300000, trips 9, min swap 0.09, max tau_E 3510 (min n/tau 68); T*=0.11545298741151405, dF=2.0735988314403784, T*_w=0.11547177408289167
+   C-start: rounds 300000, trips 18, min swap 0.21, max tau_E 4258 (min n/tau 56); T*=0.11493619726301453, dF=2.1296085391439465, T*_w=0.11508740657830703
+   T*_w=0.11521 ± 0.00021 dF_w=2.0183 ± 0.13 dF(ks x2)=1.7679 ± 0.14
+   psi at T*, all: weight=1.000, absA=0.749, absC=0.083, rmsA=0.794, rmsC=0.134, fracC=0.002, fracA=0.763
+   psi at T*, lowE_A_branch: weight=0.620, absA=0.936, absC=0.030, rmsA=0.939, rmsC=0.045, fracC=0.000, fracA=1.000
+   psi at T*, highE_branch: weight=0.380, absA=0.445, absC=0.169, rmsA=0.469, rmsC=0.209, fracC=0.006, fracA=0.376
+   psi at T*, highE_peak: weight=0.337, absA=0.423, absC=0.176, rmsA=0.445, rmsC=0.216, fracC=0.007, fracA=0.310
+n=24: T*=0.11512 ± 0.00012  dF=2.2879 ± 0.14  latent/N=0.0083181 ± 1.2e-05  Cmax=5.8034 ± 0.2 at T=0.1153  2/3-Vmin=1.12e-08  A-vs-C max|z|=4.2
+   A-start: rounds 200000, trips 5, min swap 0.12, max tau_E 2870 (min n/tau 56); T*=0.11491575069441287, dF=2.2448666384636455, T*_w=0.11494391543562144
+   C-start: rounds 200000, trips 9, min swap 0.20, max tau_E 4024 (min n/tau 40); T*=0.11535817890384328, dF=2.5103797526458784, T*_w=0.11546543792157286
+   T*_w=0.11518 ± 0.00022 dF_w=2.2243 ± 0.12 dF(ks x2)=2.0625 ± 0.16
+   psi at T*, all: weight=1.000, absA=0.750, absC=0.071, rmsA=0.794, rmsC=0.115, fracC=0.000, fracA=0.757
+   psi at T*, lowE_A_branch: weight=0.653, absA=0.922, absC=0.030, rmsA=0.927, rmsC=0.045, fracC=0.000, fracA=1.000
+   psi at T*, highE_branch: weight=0.347, absA=0.427, absC=0.150, rmsA=0.447, rmsC=0.186, fracC=0.001, fracA=0.300
+   psi at T*, highE_peak: weight=0.311, absA=0.413, absC=0.155, rmsA=0.431, rmsC=0.190, fracC=0.001, fracA=0.244

@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+# large regenerable outputs (not included in this upload)
+cairo_asi/couplings/
+cairo_asi/fss/*.npz
+cairo_asi/ptck_*.npz
+*.tmp.npz
+# LaTeX build products
+*.aux
+*.log
+!cairo_asi/*.log
+!cairo_asi/fss/*.log
+*.out
+*.synctex.gz

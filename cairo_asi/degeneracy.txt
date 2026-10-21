@@ -1,0 +1,7 @@
+1x1: N=  10  W=         8  ln W / cell = 2.0794
+2x1: N=  20  W=         4  ln W / cell = 0.6931
+2x2: N=  40  W=       272  ln W / cell = 1.4015
+3x2: N=  60  W=      2308  ln W / cell = 1.2907
+4x2: N=  80  W=     39952  ln W / cell = 1.3244
+3x3: N=  90  W=     10176  ln W / cell = 1.0253
+4x3: N= 120  W=    781060  ln W / cell = 1.1307

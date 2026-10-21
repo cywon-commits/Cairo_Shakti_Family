@@ -1,0 +1,25 @@
+[tune n=16 it0] round 0/10000 1s  min swap 0.00  trips 0
+[tune n=16 it0] round 2000/10000 21s  min swap 0.07  trips 0
+[tune n=16 it0] round 4000/10000 43s  min swap 0.04  trips 0
+[tune n=16 it0] round 6000/10000 66s  min swap 0.02  trips 0
+[tune n=16 it0] round 8000/10000 87s  min swap 0.13  trips 0
+  it0 acc: [0.87, 0.85, 0.81, 0.78, 0.72, 0.64, 0.27, 0.23, 0.65, 0.65, 0.67, 0.68, 0.71, 0.7, 0.7, 0.72, 0.72, 0.58, 0.61, 0.62, 0.62, 0.62, 0.63, 0.64, 0.63]
+[tune n=16 it1] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=16 it1] round 2000/10000 28s  min swap 0.00  trips 0
+[tune n=16 it1] round 4000/10000 60s  min swap 0.01  trips 0
+[tune n=16 it1] round 6000/10000 82s  min swap 0.01  trips 0
+[tune n=16 it1] round 8000/10000 103s  min swap 0.00  trips 0
+  it1 acc: [0.74, 0.74, 0.75, 0.75, 0.75, 0.69, 0.05, 0.67, 0.77, 0.7, 0.66, 0.65, 0.67, 0.65, 0.68, 0.66, 0.68, 0.61, 0.61, 0.62, 0.63, 0.64, 0.63, 0.61, 0.64]
+[tune n=16 it2] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=16 it2] round 2000/10000 33s  min swap 0.05  trips 0
+[tune n=16 it2] round 4000/10000 73s  min swap 0.30  trips 1
+[tune n=16 it2] round 6000/10000 113s  min swap 0.36  trips 1
+[tune n=16 it2] round 8000/10000 148s  min swap 0.47  trips 1
+  it2 acc: [0.67, 0.68, 0.66, 0.74, 0.84, 0.76, 0.48, 0.44, 0.69, 0.77, 0.65, 0.63, 0.64, 0.63, 0.64, 0.62, 0.64, 0.62, 0.61, 0.61, 0.61, 0.62, 0.61, 0.63, 0.61]
+[tune n=16 it3] round 0/10000 0s  min swap 0.00  trips 0
+[tune n=16 it3] round 2000/10000 38s  min swap 0.32  trips 0
+[tune n=16 it3] round 4000/10000 76s  min swap 0.33  trips 0
+[tune n=16 it3] round 6000/10000 120s  min swap 0.26  trips 0
+[tune n=16 it3] round 8000/10000 164s  min swap 0.23  trips 0
+  it3 acc: [0.66, 0.63, 0.66, 0.67, 0.8, 0.75, 0.22, 0.71, 0.75, 0.7, 0.63, 0.64, 0.64, 0.64, 0.65, 0.63, 0.62, 0.63, 0.63, 0.63, 0.63, 0.63, 0.63, 0.62, 0.62]
+ladder -> fss/ladder_d0.1450_n16.json [0.08, 0.0912, 0.0999, 0.1065, 0.1112, 0.1134, 0.1153, 0.1172, 0.1193, 0.1227, 0.1283, 0.1359, 0.1447, 0.1542, 0.1648, 0.1761, 0.189, 0.2033, 0.22, 0.2386, 0.2592, 0.2822, 0.3079, 0.3357, 0.3664, 0.4]
