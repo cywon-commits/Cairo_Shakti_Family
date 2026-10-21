@@ -35,6 +35,8 @@ Result: W = 2 x Z_dimer(2nx x 2ny torus, winding sector fixed by parities of nx,
 ## Cutoff convergence (hybrid_coupling.py, rc_convergence.py)
 Island-level cutoff; needle near field (centre distance < 6a), point dipoles (moment ~ length) beyond.
 - A -> C transition: d = 0.1525-0.1530, converged for rc >= 16a; NO intermediate phase (earlier "B" was a cutoff artifact).
+  [SUPERSEDED on 12x4 / 12x12 tori: the 4x2 cell cannot hold the 3-cell ladder crystal. A ladder crystal L3' is the ground
+  state for 0.1495 <~ d <~ 0.157 -- see "L3' replaces L3" and "Columnar-family walls" below and paper Sec. IV B.]
 - C is stable from d = 0.153 to 0.3467 for all rc (includes Shakti).
 - Concave side needs rc ~ 96a: C -> narrow window (N10, D; width ~0.002) -> A (re-entrant, 0.349-0.415) -> N9 (0.42-0.47) -> E (>= 0.475).
 - rc = 96a and 128a give identical labels. Figure: phase_line_converged.png
@@ -150,6 +152,218 @@ Joint (psi_A, psi_C) samples from parallel tempering.
 - => the A|C line tilts toward smaller d with increasing T (bicritical-type direct competition, no mixed phase).
   Finite-size scaling of the double-peak not yet done.
 
+## A, C, W as domino tilings of the pentagon chessboard (chessboard.py -> chessboard_ACW.png)
+Chessboard coordinates by BFS with the CCW rotation system of the pentagon (z3-z4 adjacency) graph; no conflicts.
+- A and C are BOTH basketweave tilings (2x2 blocks of two parallel dominoes, H and V blocks alternating).
+- They differ in where the block grid sits: A blocks have origin parity x+y odd ((0,1) or (1,0) over all A variants),
+  C blocks x+y even ((0,0) or (1,1)). The 4-fold offset degeneracy of basketweave on a uniform square lattice is split
+  by the Cairo sublattice structure into two pairs = A and C. A->C is a one-unit shift of the basketweave.
+- Colouring: C blocks are monochrome (H blocks CCW, V blocks CW); A blocks contain one CW and one CCW domino;
+  all closed pentagons of A lie on one chessboard colour.
+- W = stripes of the two C variants ((0,0) and (1,1) blocks) separated by walls.
+
+## Aztec diamond: block-parity order parameter Phi (aztec_phi.py, aztec_weighted.py, plot_aztec_weighted.py)
+Uniform measure (plaquette-flip MCMC, n = 24, 40, 60):
+- frozen corners: no flippable plaquettes (staggered bricks) -> Phi undefined (unnormalised density 0).
+- liquid: Phi -> 0 as ~1/n (centre Phi*n ~ 1.1-1.4, sign set by the boundary colouring). Symmetry argument:
+  odd translation (colour swap, slope -> -slope) + 180-degree rotation about a vertex (slope -> -slope) => Phi = 0
+  for every slope in infinite-volume Gibbs measures. Use class-averaged estimator (window sums are biased).
+Weighted measure P ~ exp(K sum_p F_p (-1)^{x+y}) (minimal parity-breaking model; K ~ (E_A - E_C)/T), n = 32:
+- equilibration: uniform first (400n sweeps), K annealed in 40 steps, 400n sweeps at K; checked by 90-degree symmetry.
+- |K| = 3: central square basketweave crystal (class density 1.00) directly bordered by frozen regions.
+  K = +3 -> C crystal, class (0,0) (boundary selects the C variant deterministically).
+  K = -3 -> A crystal, class (0,1) in 2/2 seeds, slightly rectangular (A variants are rotation-related: spontaneous choice).
+- K = +1: biased liquid (Phi ~ +0.3), no crystal; crystallisation threshold between K ~ 1.5 and 3.
+- Earlier K = +-1.5 runs with a short schedule were not equilibrated (horizontal-band artefact) and were discarded.
+
+## z3-coupling uncertainty (saccone_z3scale.py): scale only pairs sharing a z3 vertex (J1, J3) by lam
+- lam = 0.5 halves the z3 gap (c=376: 1197 -> 598 K) but leaves the manifold identical and E_A - E_C, manifold spread
+  unchanged to 0.01 K (c=376: -36.34, 90.95 K/island). Vertex-local energy is constant on the manifold, so selection
+  energies and T_A (manifold MC) are exactly independent of vertex-pair couplings as long as the level order holds.
+- Single-flip cooling to 150 K with lam = 0.5: c=376 still no A (|psi_A| 0.03-0.04, B 58-60%); c=500 still A (0.91-0.97).
+=> the ~2x overestimate of J1, J3 by our dipolar model does not affect T_A or the kinetic conclusions.
+
+## Boundary selection in small Aztec diamonds (aztec_small.py, aztec_dstar.py), n = 6-9
+Model: E = -sum_p F_p (1 + delta s_p) + r sum_<pq> F_p F_q (r = 1 > 1/2 makes basketweave the ground state; bulk A|C
+transition exactly at delta = 0). Parallel tempering in beta (0.1-8).
+- delta = 0: preferred class alternates with n: n = 6, 8 -> odd class (12, 20 blocks); n = 7, 9 -> even class = class of
+  the central plaquette (16, 25 blocks). Maximum = floor((n+1)^2/4). Low-T <Phi> = -0.96, +0.98, -0.97, +0.96.
+- The disfavoured class cannot form a pure crystal in the diamond: forcing it gives mixed states.
+- Ground-state switching vs delta (lower envelope over all states found; competitors are upper bounds, so true
+  switching may be earlier): pure preferred crystal survives to |delta| = 0.14 (n=6,7), 0.11 (n=8,9);
+  Phi_GS changes sign at |delta| = 0.25, 0.20, 0.17, 0.17 -> delta*(n) ~ 1.4/n with sign alternating with n parity.
+- Cairo reading: if the patch is centred on a z4 vertex (central plaquette = C class), odd n favours C and even n favours A;
+  centred on a partner bond, the reverse.
+
+## Height-function view (height.py): A and C are height plateaus of a Z4 clock
+Thurston height (black-left rule: +1 along a domino boundary, -3 across a domino). Heights at a vertex are fixed mod 4
+by position, so plateaus are compared mod 4.
+- Basketweave is flat: block-centre heights take two values differing by 4 (H/V corrugation).
+- Bulk: the four block origins sit on the four plateaus mod 4: (0,0) -> 0 [C], (1,0) -> 1 [A], (1,1) -> 2 [C], (0,1) -> 3 [A];
+  H/V swap leaves the plateau unchanged. => psi_C = cos(pi h/2), psi_A = sin(pi h/2), Phi = cos(pi h) (= psi_C^2 - psi_A^2).
+- Aztec (n = 6-9 ground states): facet plateau relative to the centre vertex = +-(n+1) mod 4 (sign from the 90-degree
+  rotation, h -> -h). Odd n -> even plateau (C), variant fixed: n = 3 mod 4 -> (0,0), n = 1 mod 4 -> (1,1).
+  Even n -> plateau +-1 (A); the two A variants are exactly degenerate (rotated ground state has the same energy).
+- Coarse-grained reading: locking potential ~ -u cos(2 pi h) (basketweave) - delta cos(pi h) (A vs C; d_c where the
+  coefficient changes sign); cos(pi h/2) (variant selection) is forbidden in the bulk and supplied only by boundaries.
+
+## Anisotropic family Cairo(d1, d2) (cairo2.py, cairo2_lambda.py, cairo2_scan.py), 4x2 exact, needle g = 0, rc = 64a
+C1-C2 pairs spaced by d1, C3-C4 pairs by d2; d_bar = (d1+d2)/2, eps = d1 - d2. Same topology and same dimer manifold.
+- d1 = d2: A1 and A2 degenerate to 1e-13 (check).
+- d1 != d2: the vertex energy is NOT constant on the manifold. Unhappy z3 can sit on either pair set; the two sets now
+  have different z3 gaps. Exact identity on the manifold: E_vertex = E_0 - lambda_v eps psi_A (residual 3e-13), because
+  psi_A counts the imbalance of unhappy vertices (dimers) between the two sets. lambda_v ~ 12.3 per spin per unit eps
+  at d_bar = 0.25. Pure-A sectors (psi_A = +-1): 512 states each of 39952.
+- Symmetry: the diagonal mirror (x,y) -> (1/2-y, 1/2-x) survives and swaps z4 A <-> B, so C and C' stay degenerate;
+  the 90-degree rotation (A1 <-> A2) is broken. Q_C = 0 by symmetry.
+- E_C - min E_A is linear in eps (total slope ~12 at d_bar = 0.25, ~15 at 0.20, dominated by the vertex term):
+  C is destroyed at eps* ~ 0.008 (d_bar = 0.25, ~3% relative) and ~0.0046 (d_bar = 0.20, ~2%).
+  => A|C boundary in the (d1, d2) plane is V-shaped around the diagonal: eps*(d_bar) = [E_A - E_C](d_bar) / lambda(d_bar).
+- Caveat: needle g = 0 overstates vertex energies; with vertex gaps (g > 0) lambda_v shrinks faster than the dipolar
+  selection energy, so eps* should be several times larger for realistic islands (not computed).
+
+## Symmetry-breaking deformations: twist and the columnar state (cairo3.py, coef_fixed.py, mixed_states.py, plot_deform_phase.py)
+Twist theta: each z3 pair rotated about its centre by theta (same sense for both sets): keeps the 90-degree rotation,
+breaks the mirrors (p4g -> p4). Checks at d_bar = 0.20: A1 = A2 to 1e-13; C+ - C- = -0.029 at theta = 0.01;
+exact identity on the manifold E_vertex = E_0 - lambda_C theta psi_C (residual 2e-13), no psi_A term.
+Fixed-state linear responses (needle g = 0, rc = 64a, 4x2; per spin): A responds only to eps (|Q_eps| 18.6 -> 12.0
+from d = 0.137 to 0.25), C only to theta (|Q_theta| 1.39, 1.04, 0.32, 1.45, 6.0 at d = 0.137, 0.153, 0.17, 0.20, 0.25;
+vertex lambda_C changes sign near d ~ 0.17). Beyond-vertex parts are ~10% (an earlier class-minimum estimate that gave
+lambda_A ~ 0 at Cairo was an artefact: the |psi_C| = 1 class minimum was a state with |psi_A| = 1 as well).
+Columnar state M (|psi_A| = |psi_C| = 1, 8 states in the 4x2 manifold; all rows of parallel dominoes stacked): responds
+to BOTH (|Q_eps| ~ A's, |Q_theta| ~ C's). Zero-field: M - A = +0.014 to +0.022; M - C = -0.007 (0.137), +0.017 (0.153),
++0.114 (0.25). Correction: the columnar state couples LINEARLY to both deformations (count-defined psi), not via eps*theta.
+Linear phase estimates (deform_phase_estimate.png): anisotropy alone -> A; twist alone -> C (and M on the Cairo side,
+theta ~ 0.01 rad at d = 0.137); both near d_c (d = 0.153): M needs theta > ~0.02 rad and eps > ~0.001 (extrapolated beyond
+the tested theta range). Not included: W, the 3-cell ladder crystal, longer periods; g > 0 not done.
+
+## Candidate crystals and their stabilization (candidates.py, cand_response.py, plot_candidates.py)
+Candidates: A, C, columnar M (4x2), wall crystal W (4x4, from the d = 0.20 PT state), ladder L3 (12x2, from the
+d = 0.150 FSS low-T state). All are manifold states. IMPORTANT: energies per spin carry a torus-size-dependent,
+state-independent offset (self-image terms; 4x2 vs 8x8 differ by 0.0067), so all comparisons use one common torus, 12x4.
+Count-based order parameters: |psi_A|, |psi_C| = A (1, 0), C (0, 1), M (1, 1), W (0, 0), L3 (0, 0).
+Linear responses (|dE/dk| per spin; vertex identity explains eps and theta): eps -> A, M only; theta -> C, M only;
+axial strain eta (x(1+eta/2), y(1-eta/2)) -> M (9.3-14.8) and L3 (3.1-5.0) only; W responds to nothing.
+Zero-field ground state (12x4): A (d = 0.137, 0.145), L3 (0.150, 0.153), C ~ W (0.160-0.25; W - C within 4e-5).
+Check: L3 - A = -0.00044 at d = 0.150, identical to the FSS 12x12 PT value.
+Smallest single knob making each candidate the ground state (linear extrapolation): M via eta = 0.0015-0.008 at all d
+(or theta ~ 0.01 rad on the Cairo side); L3 zero-field window d ~ 0.149-0.156, widened by eta ~ 0.0014-0.0019;
+C via theta near d_c; A via eps; W: no knob (stabilized only isotropically, degenerate with C).
+Figure: candidates_phase_estimate.png. Caveats: needle g = 0; linear ranges tested only to eps 0.002, theta 0.01,
+eta 0.004; candidate list is not exhaustive.
+
+## Verification of the candidate estimates (verify_exact.py, vmc_J.py, vmc_run.py, vmc_local*.py)
+Sizes: candidate comparison on 12x4 (smallest common torus of all candidates); orientation handled by symmetry
+(min over +-deformation). Unbiased search on 12x12 (smallest torus hosting every candidate in every orientation).
+- Exact energies at finite deformations (eps 0.002-0.01, theta 0.01-0.04, eta 0.002-0.008; d = 0.137-0.25): the winner
+  agrees with the linear estimate at all 63 points. Non-linear corrections grow quadratically (max 0.056 per spin at
+  eps = 0.01) but shift all candidates similarly. Weak calls: winner margins ~1e-4 (W vs C at d = 0.20; C vs A at 0.25).
+- Manifold MC on deformed lattices must use the UNDEFORMED vertex couplings for the manifold constraint (the deformed
+  ones are not degenerate on the manifold, so every psi-changing move would be rejected).
+- 12x12 annealing (6 seeds each): P1 (0.153, eta 0.004) and P3 (0.137, theta 0.02) reach exactly M in every run.
+  P2 (0.150, eta 0.002): runs stop at M (+0.0031 above L3); starting from the favourable L3 it stays (0.0000); no state
+  below L3 from any start. P4 (0.25, eps 0.01): runs stop in the A sector with defects (+0.0024); A itself is stable.
+  => no state below the predicted ground state was found at any test point (candidates_phase_verified.png).
+
+## Island-shape (vertex gap g) dependence of the deformation thresholds: formula and test
+(vertex_formula.py, gap_scaling.py, gap_scaling_verify.py, gap_scaling_general.py; 4x2, rc = 64a)
+Formula: k*_X(d, g) = Delta E_X(d, g) / lambda^(v)_{k,X}(d, g), numerator = zero-field (dipolar) selection energy,
+denominator = vertex-only linear response. For anisotropy, lambda_A = (Delta_set1 - Delta_set2)/(10 eps) from single
+z3 vertices of the deformed lattice (exact match with the manifold fit, 19.1 at d = 0.153). NOTE: the isotropic
+derivative Delta'(d)/10 is wrong (the needle moment normalisation by the mean edge length adds an overall-scale term).
+Results (actual crossing / predicted): eps* for C at g = 0.1, 0.2 and d = 0.20, 0.25: 1.08, 1.02, 0.97, 0.93.
+theta* for C at d = 0.153: g = 0.1: 1.10, g = 0.2: 1.01. eta* for columnar M at d = 0.20: g = 0: 1.00, g = 0.1: 0.92,
+g = 0.2: 0.74 (eta* = 8%: non-linear; the formula overestimates, i.e. is conservative).
+Enlargement relative to g = 0: eps (destroying C): 1.4-2.9x (lambda_A drops 4-9x but Delta E_AC also drops 2-5x);
+eta (stabilising M): ~7-8x (M's vertex eta-response collapses 12-30x, Delta E only 1.6-2.9x).
+
+## Realistic islands across the family (real_islands.py, real_islands_scan.py, real_thresholds.py, real_verify.py)
+Stadium islands 100 nm wide, 3 nm thick, Ms = 790 kA/m; z3-z4 edge 472 nm (undeformed); fixed vertex gaps 86 nm (z3-z4
+islands) and 22 nm (partner islands) -> Saccone's islands at d = 0.105; long partner islands toward Shakti. Energies in K.
+Sub-dipole counts fixed per island type from the undeformed lattice (rounding them per deformed edge made derivatives jump).
+- The width matters: a zero-width needle with the same gaps INVERTS the z3 levels ([4,2,2]); the realistic model gives the
+  normal [2,4,2] with z3 gaps 1670 K (d = 0.105) to 4160 K (Shakti).
+- Zero-field ground state among the candidates (12x4): A for d <= 0.17; W for d >= 0.18 (C 2-6 K, A 2-8 K above W).
+  Candidates are the needle-model crystals; other wall spacings could do better for real islands (not searched).
+- Thresholds (formula, verified at four points: winner flips between 0.7x and 1.3x of the prediction):
+  M (columnar) via twist 0.7-1.0 deg on the Cairo side (d = 0.105-0.145); via axial strain 3.7-6.8% everywhere.
+  L3 via axial strain 3.1-4.4% near d = 0.16-0.18 (6-13% elsewhere). C via twist 0.14-0.36 deg on the Shakti side,
+  0.6-1.0 deg near d = 0.153-0.16. A via anisotropy 1-3% of d (z3 shift 1.5-6 nm) on the Shakti side.
+
+## Ideal vs realistic islands: phase diagrams (plot_model_compare.py -> model_compare_phase.png)
+Same candidates, same first-order formula. Zero field: ideal A -> L3 (0.149-0.156) -> C ~ W; realistic A (up to ~0.175)
+-> W (C never wins; W lower by 2-6 K/island; L3 window gone). Anisotropy: realistic A takes over W at eps ~0.002-0.007,
+so A covers almost the whole plane. Twist: realistic M region much larger on the Cairo side (theta > 0.7-1 deg), C needs
+0.15-0.35 deg to beat W on the Shakti side, A survives up to ~1 deg near d ~ 0.15. Axial strain: ideal 0.15-0.8% -> M;
+realistic 3.7-6.8% (L3 pocket at d ~ 0.16-0.175, 3-6%). Twist and anisotropy remain strong knobs; axial strain becomes weak.
+
+## Analytic criterion for the wall crystal W: moment ratio mu (wall_decomp.py, wall_lattice_sums.py, plot_dmu_phase*.py,
+## wall_mu_verify.py, dmu_verify.py, dmu_verify_width.py)
+- E_W - E_C comes entirely from distant island pairs (r >= 2.7a; near pairs cancel identically), as a delicate sum of
+  large alternating terms. Hence the point-dipole limit is accurate and the island shape enters only through the moment
+  ratio mu = m_long/m_short:  E_X - E_C = S_SS(d) + mu S_LS(d) + mu^2 S_LL(d)  [units mu0 m_S^2/(4 pi a^3) ~ 300 K].
+  W: S_LL < 0 (long-long pairs favour walls), S_LS > 0. A: S_LS = 0 exactly, S_LL < 0. M: only S_SS (= A's), so M never
+  beats A at zero deformation. Ideal needle has mu = 2; realistic fixed-gap islands mu = 1.45 (d = 0.137) -> 3.1 (Shakti).
+- (d, mu) diagram (dmu_phase_verified.png): W for mu_c(d) < mu < mu_A(d); mu_c = 1.21 (0.153), 1.38 (0.175), 1.57 (0.20),
+  1.77 (0.25); mu_A ~ 1.9-2.1 (0.175), 2.8 (0.20), 3.3 (0.25). Narrow C band below mu_c, small-mu W (mu < 0.9, C within
+  0.1-0.4 K), L3 pocket near d = 0.15-0.165 at small mu.
+- Realistic checks: tuning mu via the partner gap, E_W - E_C matches the point formula within ~0.1 K and changes sign at
+  mu_c (d = 0.20, 0.25). Upper W|A boundary (mu raised via wider long islands): realistic switch between 1.9-2.3 (0.175),
+  2.6-3.0 (0.20), 3.2-3.6 (0.25), consistent with the analytic values (near-field shifts A up by ~2 K at d = 0.175).
+  With 100 nm width the fixed-gap realistic curve runs just below mu_A near Shakti (A only ~5 K above W there).
+- L3 pocket check (realistic islands, partner gap tuned): 12 of 14 points agree with the analytic diagram. L3 confirmed at
+  (0.150, 0.6), (0.155, 0.6), (0.155, 0.9), (0.160, 1.2); L3 -> A above mu ~ 0.9-1.2. The two misses lie on the pocket's
+  right edge with margins 0.04-0.9 K (C wins at (0.160, 0.9) and (0.165, 1.3); C, W, L3 within 0.2 K at (0.160, 0.9)).
+  Mechanism: near d_c the short-island terms of A and C cancel, A's gain is ~mu^2, L3 has a linear S_LS < 0 term,
+  so weak long islands (mu ~ 1, i.e. long islands about as strong as short ones) favour L3.
+
+## Wall tension from controlled stripe states (stripes.py, stripe_sums.py, stripe_real.py)
+W = lines (i - j) [X | w1 | X' | w3]; C = [X | Y] alternating, C' = [X' | Y']. Stripes X Y ... X (2k+1) w1 X' Y' ... X' (2k+1) w3,
+period P = 4k+4, are manifold states (k = 0 reproduces W). sigma_k = (e_stripe - e_C) * 10 * P/2 per wall cell, same torus.
+- Walls are sharp and nearly non-interacting: sigma_k for k = 0, 1, 2 agree within ~1% (point sums) and ~2% (realistic:
+  d = 0.25: -130.0, -127.6, -130.2 K; d = 0.20: -55.7, -54.3, -55.7 K). => when sigma < 0 the densest wall crystal (W) wins.
+- sigma(mu, d) = a + b mu + c mu^2 with a, c < 0, b > 0; sigma = 0 at mu ~ 0.9 and mu_c = 1.20 (0.153), 1.36 (0.17), 1.54 (0.20),
+  1.81 (0.25) = the W|C boundary. Point formula vs realistic: -125 vs -130 K (0.25), -58 vs -56 K (0.20).
+- Height picture: a C|C' wall (dh = 2) passes through the odd plateau (A). At mu = 2, sigma tracks E_A - E_C nearly 1:1
+  (both change by ~+0.12-0.13 from d = 0.153 to 0.25): walls get cheaper near d_c. Sharp-wall limit: sigma ~ sigma_dip(mu, d)
+  + w (E_A - E_C), linear rather than the continuum square-root form.
+
+## L3 reinterpreted: wall crystal of the columnar family (stripes_axial.py, axial_sums.py)
+- Column-pair decomposition: L3 = 2-column units separated by alternating direct (alpha) and split (beta) interfaces, but the
+  units are NOT the C crystal: they belong to higher-energy pure-C-sector states (+0.003 to +0.06 per spin above C), so an
+  axial "C|C' wall" tension grows with domain width (artefact of that reading). Discarded.
+- Evidence for "walls between columnar variants (h = 0.5 and 2.5)": local block plateaus {2,3} and {0,1} (half-integer means),
+  chessboard bands of vertical-domino ladders, response to axial strain only.
+- Lattice sums: L3 - M has all three coefficients negative for d >= 0.153 (walls always favourable in the columnar family);
+  at d = 0.137 negative for mu > 1.27. So uniform M is never the zero-field ground state; L3 replaces it.
+- Unified zero-field picture: E_GS = min(E_A, min(E_C, E_W), E_L3); W wins when sigma_C(mu, d) < 0 (mu > mu_c), L3 near d_c at small mu.
+- Response table explained by symmetry: a wall crystal keeps only what its two domain variants share. W (C, C') -> nothing;
+  L3 (M at h = 0.5 and 2.5: psi_A and psi_C flip, ladder axis shared) -> axial strain only.
+- Not done: direct construction of variable-spacing columnar stripes (needs rotated columnar pieces) to test spacing independence.
+
+## Columnar-family walls verified by direct construction (dimer_inverse.py, chess_torus.py, columnar_stripes.py)
+- Inverse map dimers -> spins: given each vertex's status, the allowed configurations form one time-reversal pair, so one spin
+  fixes all; round trip exact for A, C, M, W, L3. Global chessboard coordinates mod 2n on the n x n torus (even n only:
+  odd n is a different winding sector).
+- L3 on the chessboard = [one layer of vertical dominoes (2 rows)] + [one horizontal row], period 3 rows, with irregular
+  horizontal-row phases. Generalised: m stacked vertical layers + one horizontal row (period 2m+1), m = 1, 2, 3.
+- Wall energy per horizontal-row cell relative to uniform columnar (point sums): all of a, b, c negative at d = 0.153 and 0.20
+  (walls favourable for every mu); m = 2 and 3 equal (-0.0979, -0.0974 at mu = 1), m = 1 6-10% lower (weak attraction).
+  => the densest columnar wall crystal (m = 1) wins: L3 is the columnar analogue of W.
+- New: the regular alternating-phase m = 1 crystal (L3') is lower than PT's L3 in the full needle model:
+  relative to A, d = 0.150: L3 -0.00044, L3' -0.00094; d = 0.153: L3 -0.00320, L3' -0.00368 (per spin). Files L3alt_d*.npy.
+
+## Final theory wrap-up: L3' replaces L3; realistic columnar walls (columnar_real.py)
+- L3' (regular alternating horizontal-row phases) has a 3 x 2 minimal cell, psi_A = psi_C = 0, and is registered as candidate
+  "L3p" (cand_L3p.npy). Needle model (12x4): L3' below L3 by ~5e-4 per spin at every d (same responses: eps 0, theta 0,
+  eta 3.1-3.3). Realistic islands: L3' below L3 by 0.1-0.4 K but never the zero-field ground state on the fixed-gap curve.
+- Point sums L3' - C: S_LS, S_LL < 0 everywhere; S_SS changes sign near d = 0.155.
+- Realistic columnar walls (alternating phases): per wall cell -56.0 K (m=1) / -50.6 K (m=2) at d = 0.153 (mu = 1.70),
+  -144.3 / -137.4 K at d = 0.20 (mu = 2.42); point formula -53.2 / -47.7 and -141.7 / -135.8 K. Same picture as the needle model.
+- Redrawn with L3': candidates_phase_verified_L3p.png, model_compare_phase_L3p.png, dmu_phase_verified_L3p.png
+  (qualitatively unchanged; the ladder window widens slightly).
+
+<!-- merged from the Claude Code finite-size-scaling campaign -->
 ## Finite-size scaling of the low-T transition at d = 0.145 (fss_pt.py, fss_analyze.py, fss_plot.py, run_all.sh)
 Needle g = 0, rc = 64a, manifold MC. n = 8, 12, 16, 20, 24 (N = 10 n^2 up to 5760).
 - Code: `fss_mc.py` = `mc_keep`, the manifold_mc2 move set with h = J s kept between calls and Jl used only as CSR
@@ -166,7 +380,6 @@ Needle g = 0, rc = 64a, manifold MC. n = 8, 12, 16, 20, 24 (N = 10 n^2 up to 576
   include half the A-start/C-start difference. P(E) at T* is smoothed with a Gaussian of width 1.0 D/a^3 in total
   energy: the A branch is a comb of discrete levels (spacing 0.5 D/a^3: ground state + single excitations), so
   unsmoothed peak heights depend on the bin width (the earlier n=8 "Delta F = 2.6" was this artefact).
-
 | n | T*(n) equal height | Delta F = ln(Pmax/Pmin) | e_C - e_A at T* | C_max / N | 2/3 - V_min |
 |---|---|---|---|---|---|
 | 8  | 0.11619(7)  | 1.022(5)  | 0.008579 | 1.33e-3 | 1.51e-8 |
@@ -174,7 +387,6 @@ Needle g = 0, rc = 64a, manifold MC. n = 8, 12, 16, 20, 24 (N = 10 n^2 up to 576
 | 16 | 0.11504(9)  | 2.31(9)   | 0.008516 | 1.15e-3 | 1.28e-8 |
 | 20 | 0.1152(3)   | 2.03(14)  | 0.008385 | 1.04e-3 | 1.16e-8 |
 | 24 | 0.1151(3)   | 2.29(19)  | 0.008318 | 1.01e-3 | 1.12e-8 |
-
 (equal-weight T* agrees within 2e-4; doubling the smoothing width lowers Delta F by 0.2-0.6 but keeps the trend.)
 - First-order signatures that hold up to N = 5760: P(E) is bimodal at T* for every n with the minimum 2 or more units
   of ln P below the peaks; the latent heat stays finite, 0.0083-0.0086 per spin (extrapolations 0.00835(6) in 1/N,
@@ -213,7 +425,6 @@ Needle g = 0, rc = 64a, manifold MC. n = 8, 12, 16, 20, 24 (N = 10 n^2 up to 576
   P(E) at T*, psi at T*), fss_summary_d0.1450.json (fits), fss_d0.1450.png (P(E) at T*(n), Delta F(n), C_max(N),
   T*(n) vs 1/n^2, latent heat, Binder), fss_diag_d0.1450.png (PT diagnostics), fss_psi_d0.1450.png, fss_middle_d0.1450.json,
   fss_local_d0.1450_n24.json; raw PT data fss/pt_d0.1450_n{n}_{A,C}_s1.npz (E stored as float32 offset by meta.Eref).
-
 ## (d, T) plane near the A boundary at n = 12 (run_dscan.sh, fss_phase_dT.py -> fss_dT_phase.png, fss_dscan_n12.json)
 PT at n = 12, 4e5 rounds per start, ladders tuned per d (fss/ladder_d*_n12.json). Only a single size, so these are
 positions, not FSS verdicts.

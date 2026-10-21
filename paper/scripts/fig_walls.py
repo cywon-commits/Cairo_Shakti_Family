@@ -1,9 +1,10 @@
-import sys; sys.path.insert(0, "/mnt/user-data/outputs/paper/scripts")
+import sys, os; from pathlib import Path; _H = Path(__file__).resolve().parent; _CODE = _H.parents[1] / "cairo_asi"
+sys.path.insert(0, str(_H)); sys.path.insert(0, str(_CODE)); os.chdir(_CODE)   # data files are read relative to cairo_asi/
 import numpy as np, json
 from figstyle import *
 UNIT_K = 1e-7*(790e3*((300 - 100)*100 + np.pi*50**2)*3e-27)**2/(472e-9)**3/1.380649e-23
 S = {}
-for f in ("stripe_sums_0.20_0.25.json", "stripe_sums_0.153_0.17.json"): S.update(json.load(open("/mnt/user-data/outputs/cairo_asi/" + f)))
+for f in ("stripe_sums_0.20_0.25.json", "stripe_sums_0.153_0.17.json"): S.update(json.load(open("" + f)))
 cm = plt.get_cmap("viridis"); DC = {"0.153": cm(0.0), "0.17": cm(0.33), "0.2": cm(0.62), "0.25": cm(0.9)}
 fig, axs = plt.subplots(1, 3, figsize=(7.0, 3.05)); mu = np.linspace(0.5, 3.5, 300)
 ax = axs[0]

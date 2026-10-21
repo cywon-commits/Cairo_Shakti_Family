@@ -1,9 +1,10 @@
-import sys; sys.path.insert(0, "/mnt/user-data/outputs/paper/scripts"); sys.path.insert(0, "/mnt/user-data/outputs/cairo_asi")
+import sys, os; from pathlib import Path; _H = Path(__file__).resolve().parent; _CODE = _H.parents[1] / "cairo_asi"
+sys.path.insert(0, str(_H)); sys.path.insert(0, str(_CODE)); os.chdir(_CODE)   # data files are read relative to cairo_asi/
 import numpy as np, json
 from figstyle import *
 from matplotlib.colors import ListedColormap
 names = ["A", "C", "M", "W", "L3p"]
-S = {X: {float(k): v for k, v in json.load(open(f"/mnt/user-data/outputs/cairo_asi/lattice_sums_{X}.json")).items()} for X in ("A", "M", "W", "L3p")}
+S = {X: {float(k): v for k, v in json.load(open(f"lattice_sums_{X}.json")).items()} for X in ("A", "M", "W", "L3p")}
 def coef(X, d, key):
     if X == "C": return 0.0
     D = sorted(S[X]); return np.interp(d, D, [S[X][x][key] for x in D])

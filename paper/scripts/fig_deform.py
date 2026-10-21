@@ -1,14 +1,15 @@
-import sys; sys.path.insert(0, "/mnt/user-data/outputs/paper/scripts")
+import sys, os; from pathlib import Path; _H = Path(__file__).resolve().parent; _CODE = _H.parents[1] / "cairo_asi"
+sys.path.insert(0, str(_H)); sys.path.insert(0, str(_CODE)); os.chdir(_CODE)   # data files are read relative to cairo_asi/
 import numpy as np, json, glob
 from figstyle import *
 from matplotlib.colors import ListedColormap
 R = {}
-for f in glob.glob("/mnt/user-data/outputs/cairo_asi/cand_response12x4_*.json"): R.update({float(k): v for k, v in json.load(open(f)).items() if "L3p" in v})
+for f in glob.glob("cand_response12x4_*.json"): R.update({float(k): v for k, v in json.load(open(f)).items() if "L3p" in v})
 D = np.array(sorted(R)); names = ["A", "C", "M", "W", "L3p"]
 def g(X, key, d): return np.interp(d, D, [R[x][X][key] for x in D])
 def E(X, d, e=0, t=0, n=0): return g(X, "E0", d) - g(X, "|Q_eps|", d)*abs(e) - g(X, "|Q_theta|", d)*abs(t) - g(X, "|Q_eta|", d)*abs(n)
 cmap = ListedColormap([FILL[X] for X in names])
-V = json.load(open("/mnt/user-data/outputs/cairo_asi/verify_exact.json"))
+V = json.load(open("verify_exact.json"))
 fig, axs = plt.subplots(1, 3, figsize=(7.0, 2.55))
 dg = np.linspace(D[0], D[-1], 300)
 spec = [("e", 0.012, 1, "anisotropy $\\varepsilon=d_1-d_2$", "eps"), ("t", np.radians(2.3), np.degrees(1), "twist $\\theta$ (deg)", "theta"), ("n", 0.012, 100, "axial strain $\\eta$ (%)", "eta")]

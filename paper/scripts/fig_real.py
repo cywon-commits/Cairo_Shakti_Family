@@ -1,8 +1,9 @@
-import sys; sys.path.insert(0, "/mnt/user-data/outputs/paper/scripts")
+import sys, os; from pathlib import Path; _H = Path(__file__).resolve().parent; _CODE = _H.parents[1] / "cairo_asi"
+sys.path.insert(0, str(_H)); sys.path.insert(0, str(_CODE)); os.chdir(_CODE)   # data files are read relative to cairo_asi/
 import numpy as np, json
 from figstyle import *
 from matplotlib.colors import ListedColormap
-Rr = {float(k): v for k, v in json.load(open("/mnt/user-data/outputs/cairo_asi/real_islands_scan.json")).items() if v["valid"] and "L3p" in v["E0"]}
+Rr = {float(k): v for k, v in json.load(open("real_islands_scan.json")).items() if v["valid"] and "L3p" in v["E0"]}
 D = np.array(sorted(Rr)); names = ["A", "C", "M", "W", "L3p"]
 def g(X, key, d):
     if key == "E0": return np.interp(d, D, [Rr[x]["E0"][X] for x in D])

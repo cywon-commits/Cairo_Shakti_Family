@@ -1,0 +1,55 @@
+d=0.105 (zero-field GS A; E - E_GS: C +56.6 K, M +5.3 K, W +56.6 K, L3 +21.6 K)
+     C  : eps: — | theta: — | eta: —
+     M  : eps: — | theta: 0.0121 rad = 0.69 deg | eta: 3.67% strain
+     W  : eps: — | theta: — | eta: —
+     L3 : eps: — | theta: — | eta: —
+d=0.120 (zero-field GS A; E - E_GS: C +39.5 K, M +7.6 K, W +39.0 K, L3 +15.2 K)
+     C  : eps: — | theta: — | eta: —
+     M  : eps: — | theta: 0.0149 rad = 0.85 deg | eta: 4.28% strain
+     W  : eps: — | theta: — | eta: —
+     L3 : eps: — | theta: — | eta: —
+d=0.137 (zero-field GS A; E - E_GS: C +23.1 K, M +10.3 K, W +22.4 K, L3 +9.4 K)
+     C  : eps: — | theta: — | eta: —
+     M  : eps: — | theta: 0.0172 rad = 0.99 deg | eta: 4.59% strain
+     W  : eps: — | theta: — | eta: —
+     L3 : eps: — | theta: — | eta: 12.59% strain
+d=0.145 (zero-field GS A; E - E_GS: C +17.0 K, M +11.6 K, W +16.1 K, L3 +7.3 K)
+     C  : eps: — | theta: — | eta: —
+     M  : eps: — | theta: 0.0182 rad = 1.04 deg | eta: 4.68% strain
+     W  : eps: — | theta: — | eta: —
+     L3 : eps: — | theta: — | eta: 8.88% strain
+d=0.153 (zero-field GS A; E - E_GS: C +11.8 K, M +13.0 K, W +10.7 K, L3 +5.7 K)
+     C  : eps: — | theta: 0.0176 rad = 1.01 deg | eta: —
+     M  : eps: — | theta: — | eta: 4.77% strain
+     W  : eps: — | theta: — | eta: —
+     L3 : eps: — | theta: — | eta: 6.31% strain
+d=0.160 (zero-field GS A; E - E_GS: C +7.6 K, M +14.2 K, W +6.3 K, L3 +4.4 K)
+     C  : eps: — | theta: 0.0108 rad = 0.62 deg | eta: —
+     M  : eps: — | theta: — | eta: 5.03% strain
+     W  : eps: — | theta: — | eta: —
+     L3 : eps: — | theta: — | eta: 4.44% strain
+d=0.170 (zero-field GS A; E - E_GS: C +3.1 K, M +16.2 K, W +1.5 K, L3 +3.5 K)
+     C  : eps: — | theta: 0.0042 rad = 0.24 deg | eta: —
+     M  : eps: — | theta: — | eta: 5.78% strain
+     W  : eps: — | theta: — | eta: —
+     L3 : eps: — | theta: — | eta: 3.14% strain
+d=0.180 (zero-field GS W; E - E_GS: A +2.2 K, C +1.9 K, M +20.4 K, L3 +5.2 K)
+     A  : eps: 0.0016 = 0.9% of d, z3 shift 1.5 nm | theta: — | eta: —
+     C  : eps: — | theta: 0.0024 rad = 0.14 deg | eta: —
+     M  : eps: — | theta: — | eta: 6.23% strain
+     L3 : eps: — | theta: — | eta: 4.21% strain
+d=0.200 (zero-field GS W; E - E_GS: A +6.8 K, C +2.8 K, M +29.5 K, L3 +10.3 K)
+     A  : eps: 0.0052 = 2.6% of d, z3 shift 4.8 nm | theta: — | eta: —
+     C  : eps: — | theta: 0.0032 rad = 0.18 deg | eta: —
+     M  : eps: — | theta: — | eta: 6.59% strain
+     L3 : eps: — | theta: — | eta: 6.93% strain
+d=0.220 (zero-field GS W; E - E_GS: A +8.4 K, C +4.1 K, M +36.0 K, L3 +14.0 K)
+     A  : eps: 0.0066 = 3.0% of d, z3 shift 6.2 nm | theta: — | eta: —
+     C  : eps: — | theta: 0.0044 rad = 0.25 deg | eta: —
+     M  : eps: — | theta: — | eta: 6.76% strain
+     L3 : eps: — | theta: — | eta: 7.89% strain
+d=0.250 (zero-field GS W; E - E_GS: A +5.1 K, C +6.5 K, M +41.2 K, L3 +17.5 K)
+     A  : eps: 0.0040 = 1.6% of d, z3 shift 3.8 nm | theta: — | eta: —
+     C  : eps: — | theta: 0.0063 rad = 0.36 deg | eta: —
+     M  : eps: — | theta: — | eta: 6.21% strain
+     L3 : eps: — | theta: — | eta: 7.92% strain

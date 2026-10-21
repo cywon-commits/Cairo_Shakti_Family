@@ -1,4 +1,5 @@
-import sys; sys.path.insert(0, "/mnt/user-data/outputs/paper/scripts")
+import sys, os; from pathlib import Path; _H = Path(__file__).resolve().parent; _CODE = _H.parents[1] / "cairo_asi"
+sys.path.insert(0, str(_H)); sys.path.insert(0, str(_CODE)); os.chdir(_CODE)   # data files are read relative to cairo_asi/
 import numpy as np
 from figstyle import *
 from matplotlib.patches import Rectangle
@@ -16,7 +17,7 @@ save(fig, "fig9_saccone")
 # ---------- Fig. 10: small Aztec diamonds ----------
 fig = plt.figure(figsize=(7.0, 3.6)); gs = gridspec.GridSpec(2, 4, height_ratios=[1.35, 1], hspace=0.45, wspace=0.18)
 for col, n in enumerate([6, 7, 8, 9]):
-    ax = fig.add_subplot(gs[0, col]); part = np.load(f"/mnt/user-data/outputs/cairo_asi/aztecS_gs_n{n}_d+0.000_s5.npy"); S = part.shape[0]; off = n + 1
+    ax = fig.add_subplot(gs[0, col]); part = np.load(f"aztecS_gs_n{n}_d+0.000_s5.npy"); S = part.shape[0]; off = n + 1
     inside = np.array([[abs(a - off + 0.5) + abs(b - off + 0.5) <= n for b in range(S)] for a in range(S)])
     for a in range(S):
         for b in range(S):

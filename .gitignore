@@ -1,14 +1,13 @@
 __pycache__/
 *.pyc
-# large regenerable outputs (not included in this upload)
-cairo_asi/couplings/
-cairo_asi/fss/*.npz
-cairo_asi/ptck_*.npz
-*.tmp.npz
-# LaTeX build products
-*.aux
-*.log
-!cairo_asi/*.log
-!cairo_asi/fss/*.log
-*.out
-*.synctex.gz
+# regenerable coupling caches (written by needle.py / real_islands.py / vmc_run.py on first use)
+cairo_asi/J_d*.npz
+cairo_asi/vmcJ_*.npz
+cairo_asi/Jsac_*.npz
+cairo_asi/couplings/*.npz
+# large parallel-tempering checkpoints (regenerate with cairo_asi/run_all.sh)
+cairo_asi/fss/pt_*.npz
+# LaTeX build files
+paper/*.aux
+paper/*.log
+paper/*.out

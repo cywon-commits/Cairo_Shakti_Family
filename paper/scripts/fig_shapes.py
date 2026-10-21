@@ -1,4 +1,5 @@
-import sys; sys.path.insert(0, "/mnt/user-data/outputs/paper/scripts"); sys.path.insert(0, "/mnt/user-data/outputs/cairo_asi")
+import sys, os; from pathlib import Path; _H = Path(__file__).resolve().parent; _CODE = _H.parents[1] / "cairo_asi"
+sys.path.insert(0, str(_H)); sys.path.insert(0, str(_CODE)); os.chdir(_CODE)   # data files are read relative to cairo_asi/
 import numpy as np, json, glob
 from figstyle import *
 import matplotlib.gridspec as gridspec
@@ -11,16 +12,16 @@ from hybrid_coupling import local_needle_coupling
 from dimer_map import DimerMap
 from plot_phases import tile
 from cand_response import CairoLattice4
-exec(open("/mnt/user-data/outputs/paper/scripts/fig_lattice.py").read().split("# ---------- Fig. 2")[0].split("# ---------- helpers for state drawings ----------")[1])
+exec(open(_H / "fig_lattice.py").read().split("# ---------- Fig. 2")[0].split("# ---------- helpers for state drawings ----------")[1])
 # ======================= Fig. 4: shapes of M and L3' =======================
 from cairo2 import S0
 from selection_T import FastDimers
 L4 = CairoLattice(4, 2, d=0.20); F = FastDimers(L4, local_needle_coupling(L4)); ps = np.array([F.psi(x) for x in S0])
 M4 = S0[np.flatnonzero((np.abs(np.abs(ps[:, 0]) - 1) < 1e-9) & (np.abs(np.abs(ps[:, 1]) - 1) < 1e-9))[0]]
 LM = CairoLattice(8, 8, d=0.153); DM = DimerMap(LM, local_needle_coupling(LM)); sM = tile(M4, 4, 2, 8)
-LL = CairoLattice(12, 12, d=0.153); DL = DimerMap(LL, local_needle_coupling(LL)); sL = np.load("/mnt/user-data/outputs/cairo_asi/L3alt_d0.153_n12.npy")
+LL = CairoLattice(12, 12, d=0.153); DL = DimerMap(LL, local_needle_coupling(LL)); sL = np.load("L3alt_d0.153_n12.npy")
 R = {}
-for f in glob.glob("/mnt/user-data/outputs/cairo_asi/cand_response12x4_*.json"): R.update({float(k): v for k, v in json.load(open(f)).items() if "L3p" in v})
+for f in glob.glob("cand_response12x4_*.json"): R.update({float(k): v for k, v in json.load(open(f)).items() if "L3p" in v})
 D = np.array(sorted(R)); names = ["A", "C", "W", "M", "L3p"]; lab = {"A": "A", "C": "C", "W": "W", "M": "M (columnar)", "L3p": "L3$'$ (ladder)"}
 fig = plt.figure(figsize=(7.0, 5.1)); gs = gridspec.GridSpec(2, 3, width_ratios=[1, 1, 1.05], wspace=0.48, hspace=0.42)
 ax = fig.add_subplot(gs[0, 0]); draw_real(ax, LM, DM, sM); ax.set_title("(a) M in real space", fontsize=8.5, loc="left", pad=3)

@@ -8,7 +8,12 @@ def hybrid_coupling(L, rc, r0=6.0):
     needle.SUBDIV = 8; needle.FIXED_M = True      # GAP is left as set by the caller
     P, Dr, Wt, own, a, is34 = subdipoles(L)
     N = L.N; box = L.box / a
-    C = L.epos / a; m = L.edir; mom = (L.elen - 2*needle.GAP*a) / a
+    is34_ = np.array([tuple(sorted(L.vtype[L.edges[k]])) == (3, 4) for k in range(L.N)])
+    gv = np.where(is34_ | (needle.GAP_P is None), needle.GAP, needle.GAP_P if needle.GAP_P is not None else needle.GAP)
+    C = L.epos / a; m = L.edir; mom = (L.elen - 2*gv*a) / a
+    if needle.GAP3 is not None:
+        mom = np.where(is34_, (L.elen - (needle.GAP3 + needle.GAP4)*a)/a, mom)
+        C = C + np.where(is34_[:, None], 0.5*(needle.GAP3 - needle.GAP4)*L.edir, 0.0)
     J = np.zeros((N, N))
     nix = int(np.ceil(rc / box[0])) + 1; niy = int(np.ceil(rc / box[1])) + 1
     dC0 = C[None, :, :] - C[:, None, :]

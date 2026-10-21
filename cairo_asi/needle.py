@@ -3,6 +3,9 @@ Each island of length l is split into m = round(l/h) equal segments (h = z3z4-ed
 dipole of moment l/m at the segment centre (moment ~ length). Energies in units of D/a^3, a = z3-z4 edge length."""
 import numpy as np
 from cairo_asi import CairoLattice
+GAP3 = None      # optional z3-end gap of z3-z4 islands (with GAP4); None -> symmetric GAP
+GAP4 = None      # optional z4-end gap of z3-z4 islands
+GAP_P = None     # optional separate gap for partner (z3-z3) islands; None -> same as GAP
 GAP = 0.0        # vertex gap g in units of a (z3-z4 edge length); islands shortened by 2g
 FIXED_M = False  # True: fixed #segments per island type -> energies smooth in d
 SUBDIV = 2   # sub-dipoles per short (z3-z4) island; set larger for a smooth needle
@@ -12,9 +15,14 @@ def subdipoles(L):
     a = L.elen[is34].mean(); h = a / SUBDIV
     P, Dr, Wt, own = [], [], [], []
     for k in range(L.N):
-        l = L.elen[k] - 2*GAP*a
+        if is34[k] and GAP3 is not None:                      # asymmetric: edges are oriented z3 -> z4
+            l = L.elen[k] - (GAP3 + GAP4)*a
+            centre = L.epos[k] + 0.5*(GAP3 - GAP4)*a*L.edir[k]
+        else:
+            g = GAP if (is34[k] or GAP_P is None) else GAP_P
+            l = L.elen[k] - 2*g*a; centre = L.epos[k]
         m = (SUBDIV if is34[k] else 2*SUBDIV) if FIXED_M else max(1, int(round(l / h)))
-        start = L.epos[k] - 0.5 * l * L.edir[k]   # centred on the edge
+        start = centre - 0.5 * l * L.edir[k]
         for t in range(m):
             P.append(start + (t + 0.5) * (l / m) * L.edir[k]); Dr.append(L.edir[k]); Wt.append(l / m / a); own.append(k)
     return np.array(P) / a, np.array(Dr), np.array(Wt), np.array(own), a, is34
